@@ -30,6 +30,7 @@ class App extends Component {
     // console.log(this.state.novoTweet);
     // this.state.tweets.push(this.state.novoTweet);
 
+    // spread operator
     this.setState({ tweets: [ this.state.novoTweet, ...this.state.tweets ] });
     // this.setState({ tweets: this.state.tweets });
 
