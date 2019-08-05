@@ -6,11 +6,12 @@ import Dashboard from './components/Dashboard'
 import Widget from './components/Widget'
 import TrendsArea from './components/TrendsArea'
 import Tweet from './components/Tweet'
+import If from './components/If';
 
 class App extends Component {
   // constructor () {
     // super();
-    
+
     // this.handleNovoTweetChange = this.handleNovoTweetChange.bind(this);
   // }
 
@@ -33,11 +34,12 @@ class App extends Component {
     // spread operator
     this.setState({ tweets: [ this.state.novoTweet, ...this.state.tweets ] });
     // this.setState({ tweets: this.state.tweets });
-
   }
 
   novoTweetValido = () => {
-    return this.state.novoTweet.length > 0 && this.state.novoTweet.length <= 140
+    const { length: novoTweetLenght} = this.state.novoTweet;
+
+    return novoTweetLenght > 0 && novoTweetLenght <= 140;
   }
 
   render() {
@@ -80,15 +82,37 @@ class App extends Component {
           </Dashboard>
           <Dashboard posicao="centro">
             <Widget>
+              {/* {this.state.tweets.length === 0 ?
+                'Tweet alguma coisa!' : (
+                <div className="tweetsArea">
+                  {this.state.tweets.map((tweet) => (
+                    <Tweet
+                      nomeUsuario="Felizberto da Silva"
+                      usuario="felizberto"
+                      avatarURL="https://bit.ly/2YLM3Ii"
+                    >
+                      {tweet}
+                    </Tweet>
+                  ))}
+                </div>
+              )} */}
+              { /* truthy */ }
+              {/* {this.state.tweets.length === 0 && 'Twite alguma coisa!'} */}
+
+              <If condition={this.state.tweets.length === 0}>
+                Twite alguma coisa!
+              </If>
+
               <div className="tweetsArea">
-                {/* função do obj Array */}
-                <Tweet
-                  nomeUsuario="Felizberto da Silva"
-                  usuario="felizberto"
-                  avatarURL="https://bit.ly/2YLM3Ii"
-                >
-                  Hoje é dia de maldade!
-                </Tweet>
+                {this.state.tweets.map((tweet) => (
+                  <Tweet
+                    nomeUsuario="Felizberto da Silva"
+                    usuario="felizberto"
+                    avatarURL="https://bit.ly/2YLM3Ii"
+                  >
+                    {tweet}
+                  </Tweet>
+                ))}
               </div>
             </Widget>
           </Dashboard>
