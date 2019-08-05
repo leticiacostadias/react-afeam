@@ -1,17 +1,15 @@
 import React from 'react';
 import './App.css';
 
-import Cabecalho from './Cabecalho';
+import Cabecalho from './components/Cabecalho';
+import NavMenu from './components/NavMenu';
 
 function App () {
   return (
-    <div className="App">
-      <div className="App-header">
-        <Cabecalho />
-      </div>
-      <p className="App-intro">
-        To get started, edit <code>src/App.js</code> and save to reload.
-      </p>
+    <div>
+      <Cabecalho nomeUsuario={Math.random()}>
+        <NavMenu />
+      </Cabecalho>
     </div>
   );
 }
