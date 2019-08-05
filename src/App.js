@@ -32,7 +32,13 @@ class App extends Component {
           <Dashboard posicao="centro">
             <Widget>
               <div className="tweetsArea">
-                <Tweet />
+                <Tweet
+                  nomeUsuario="Felizberto da Silva"
+                  usuario="felizberto"
+                  avatarURL="https://bit.ly/2YLM3Ii"
+                >
+                  Hoje é dia de maldade!
+                </Tweet>
               </div>
             </Widget>
           </Dashboard>
