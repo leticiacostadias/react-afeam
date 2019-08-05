@@ -15,12 +15,24 @@ class App extends Component {
   // }
 
   state = {
-    novoTweet: ''
+    novoTweet: '',
+    tweets: []
   }
 
   handleNovoTweetChange = (evento) => {
     // console.log(this);
     this.setState({ novoTweet: evento.target.value });
+  }
+
+  handleCriaTweet = (evento) => {
+    evento.preventDefault();
+
+    // console.log(this.state.novoTweet);
+    // this.state.tweets.push(this.state.novoTweet);
+
+    this.setState({ tweets: [ this.state.novoTweet, ...this.state.tweets ] });
+    // this.setState({ tweets: this.state.tweets });
+
   }
 
   novoTweetValido = () => {
@@ -29,6 +41,7 @@ class App extends Component {
 
   render() {
     // console.log(this.state.novoTweet);
+    console.log(this.state.tweets);
 
     return (
       <Fragment>
@@ -38,16 +51,26 @@ class App extends Component {
         <div className="container">
           <Dashboard>
             <Widget>
-              <form className="novoTweet">
+              <form className="novoTweet" onSubmit={this.handleCriaTweet}>
                 <div className="novoTweet__editorArea">
-                  <span className={`novoTweet__status ${this.novoTweetValido() ? '' : 'novoTweet__status--invalido'}`}>{this.state.novoTweet.length}/140</span>
+                  <span
+                    className={`novoTweet__status ${this.novoTweetValido() ? '' : 'novoTweet__status--invalido'}`}
+                  >
+                    {this.state.novoTweet.length}/140
+                  </span>
                   <textarea
                     className="novoTweet__editor"
                     placeholder="O que está acontecendo?"
                     onChange={this.handleNovoTweetChange}
                   />
                 </div>
-                <button type="submit" className="novoTweet__envia">Tweetar</button>
+                <button
+                  type="submit"
+                  className="novoTweet__envia"
+                  disabled={!this.novoTweetValido()}
+                >
+                  Tweetar
+                </button>
               </form>
             </Widget>
             <Widget>
@@ -57,6 +80,7 @@ class App extends Component {
           <Dashboard posicao="centro">
             <Widget>
               <div className="tweetsArea">
+                {/* função do obj Array */}
                 <Tweet
                   nomeUsuario="Felizberto da Silva"
                   usuario="felizberto"
