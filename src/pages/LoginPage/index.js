@@ -4,6 +4,10 @@ import { Cabecalho, Widget } from '../../components'
 import './loginPage.css'
 
 class LoginPage extends Component {
+  state = {
+    erroMsg: ''
+  }
+
   handleLogar = (evento) => {
     evento.preventDefault();
 
@@ -23,17 +27,37 @@ class LoginPage extends Component {
         login,
         senha
       })
-    }).then((resposta) => {
-      console.log(resposta.ok);
+    }).then(async (resposta) => {
+      if (!resposta.ok) {
+        const errorObj = {
+          status: resposta.status,
+          payload: await resposta.json()
+        };
+
+        throw errorObj;
+      }
 
       return resposta.json();
-    }).then(data => console.log(data))
-      .catch((err) => {
+    }).then(data => {
+      // console.log(data)
 
+      // salvar o token
+      // localStorage, cookie, sessionStorage
+      localStorage.setItem('token', data.token);
+
+      // redirecionar pro feed
+      // console.log(this.props);
+      this.props.history.push('/');
+    }).catch((errorObj) => {
+      this.setState({
+        erroMsg: `Status: ${errorObj.status}. ${errorObj.payload.message}`
       });
+    });
   }
 
   render() {
+    const { erroMsg } = this.state;
+
     return (
       <Fragment>
         <Cabecalho />
@@ -53,9 +77,11 @@ class LoginPage extends Component {
                   <label className="loginPage__label" htmlFor="senha">Senha</label>
                   <input ref="senha" className="loginPage__input" type="password" id="senha" name="senha" />
                 </div>
-                <div className="loginPage__errorBox">
-                  Mensagem de erro!
-                </div>
+                {erroMsg && (
+                  <div className="loginPage__errorBox">
+                    {erroMsg}
+                  </div>
+                )}
                 <div className="loginPage__inputWrap">
                   <button className="loginPage__btnLogin" type="submit">
                     Logar
