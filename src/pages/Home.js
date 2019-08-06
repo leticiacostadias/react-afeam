@@ -18,6 +18,7 @@ class Home extends Component {
 
     // this.handleNovoTweetChange = this.handleNovoTweetChange.bind(this);
   // }
+  static contextType = NotificaoContext;
 
   state = {
     novoTweet: '',
@@ -40,6 +41,8 @@ class Home extends Component {
       tweets: [ this.state.novoTweet, ...this.state.tweets ],
       novoTweet: ''
     });
+
+    this.context.setMensagem('Novo tweet criado');
     // this.setState({ tweets: this.state.tweets });
   }
 
@@ -125,13 +128,6 @@ class Home extends Component {
             </Widget>
           </Dashboard>
         </div>
-        <NotificaoContext.Consumer>
-          {(context) => (
-            <div className="notificacaoMsg">
-              {context.mensagem}
-            </div>
-          )}
-        </NotificaoContext.Consumer>
       </Fragment>
     );
   }
