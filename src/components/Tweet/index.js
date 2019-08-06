@@ -3,7 +3,12 @@ import './tweet.css'
 
 class Tweet extends Component {
   render() {
-    const { avatarURL, nomeUsuario, usuario, children } = this.props;
+    const {
+      avatarURL,
+      nomeUsuario,
+      usuario,
+      children
+    } = this.props;
 
     return (
       <article className="tweet">
