@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, useContext } from 'react';
 
-import Cabecalho from '../components/Cabecalho'
+// import Cabecalho from '../components/Cabecalho'
 import NavMenu from '../components/NavMenu'
 import Dashboard from '../components/Dashboard'
 // import Widget from '../components/Widget'
@@ -8,7 +8,9 @@ import TrendsArea from '../components/TrendsArea'
 // import Tweet from '../components/Tweet'
 import If from '../components/If';
 
-import { Tweet, Widget } from '../components';
+import { Cabecalho, Tweet, Widget } from '../components';
+
+import { NotificaoContext } from './../contexts/NotificacaoContext';
 
 class Home extends Component {
   // constructor () {
@@ -123,6 +125,13 @@ class Home extends Component {
             </Widget>
           </Dashboard>
         </div>
+        <NotificaoContext.Consumer>
+          {(context) => (
+            <div className="notificacaoMsg">
+              {context.mensagem}
+            </div>
+          )}
+        </NotificaoContext.Consumer>
       </Fragment>
     );
   }
