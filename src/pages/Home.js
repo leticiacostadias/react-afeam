@@ -1,14 +1,22 @@
 import React, { Component, Fragment } from 'react';
 
 // import Cabecalho from '../components/Cabecalho'
-import NavMenu from '../components/NavMenu'
-import Dashboard from '../components/Dashboard'
+// import NavMenu from '../components/NavMenu'
+// import Dashboard from '../components/Dashboard'
 // import Widget from '../components/Widget'
-import TrendsArea from '../components/TrendsArea'
+// import TrendsArea from '../components/TrendsArea'
 // import Tweet from '../components/Tweet'
-import If from '../components/If';
+// import If from '../components/If';
 
-import { Cabecalho, Tweet, Widget } from '../components';
+import {
+  Cabecalho,
+  Tweet,
+  Widget,
+  NavMenu,
+  Dashboard,
+  TrendsArea,
+  If
+} from '../components';
 
 import { NotificaoContext } from './../contexts/NotificacaoContext';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import Widget from '../components/Widget';
+import { Widget } from '../components';
 
 export default ({ location }) => {
   // console.log(props);
