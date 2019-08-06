@@ -12,7 +12,7 @@ function usuarioEstaLogado () {
 }
 
 function RotaPrivada (props) {
-  if (usuarioEstaLogado) {
+  if (usuarioEstaLogado()) {
     return <Route {...props} />;
   }
 
