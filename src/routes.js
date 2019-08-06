@@ -11,19 +11,32 @@ function usuarioEstaLogado () {
   return localStorage.getItem('token');
 }
 
-function RotaPrivada (props) {
-  if (usuarioEstaLogado()) {
+function RotaAutenticada ({ deveEstarLogado, redirectTo, ...props }) {
+  if ((deveEstarLogado && usuarioEstaLogado())
+    || (!deveEstarLogado && !usuarioEstaLogado())) {
     return <Route {...props} />;
   }
 
-  return <Redirect to="/login" />;
+  return <Redirect to={redirectTo} />;
 }
 
 function Roteamento() {
   return (
     <Switch>
-      <RotaPrivada path="/" component={Home} exact />
-      <Route path="/login" component={Login} />
+      <RotaAutenticada
+        // deveEstarLogado
+        deveEstarLogado={true}
+        redirectTo="/login"
+        path="/"
+        component={Home}
+        exact
+      />
+      <RotaAutenticada
+        deveEstarLogado={false}
+        redirectTo="/"
+        path="/login"
+        component={Login}
+      />
       <Route path="/logout" component={Logout} />
       <Route path="/:categoria/:produto" component={Produto} exact />
       <Route path="*" component={NotFound} />
