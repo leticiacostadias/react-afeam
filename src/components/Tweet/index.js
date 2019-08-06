@@ -13,7 +13,11 @@ class Tweet extends Component {
     return (
       <article className="tweet">
         <div className="tweet__cabecalho">
-          <img className="tweet__fotoUsuario" src={avatarURL} alt="" />
+          <img
+            className="tweet__fotoUsuario"
+            src={avatarURL}
+            alt=""
+          />
           <span className="tweet__nomeUsuario">{nomeUsuario}</span>
           <a href="/"><span className="tweet__userName">
             @{usuario}

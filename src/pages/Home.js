@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from 'react';
 
-import Cabecalho from './components/Cabecalho'
-import NavMenu from './components/NavMenu'
-import Dashboard from './components/Dashboard'
-import Widget from './components/Widget'
-import TrendsArea from './components/TrendsArea'
-import Tweet from './components/Tweet'
-import If from './components/If';
+import Cabecalho from '../components/Cabecalho'
+import NavMenu from '../components/NavMenu'
+import Dashboard from '../components/Dashboard'
+import Widget from '../components/Widget'
+import TrendsArea from '../components/TrendsArea'
+import Tweet from '../components/Tweet'
+import If from '../components/If';
 
-class App extends Component {
+class Home extends Component {
   // constructor () {
     // super();
 
@@ -32,7 +32,10 @@ class App extends Component {
     // this.state.tweets.push(this.state.novoTweet);
 
     // spread operator
-    this.setState({ tweets: [ this.state.novoTweet, ...this.state.tweets ] });
+    this.setState({
+      tweets: [ this.state.novoTweet, ...this.state.tweets ],
+      novoTweet: ''
+    });
     // this.setState({ tweets: this.state.tweets });
   }
 
@@ -65,6 +68,7 @@ class App extends Component {
                     className="novoTweet__editor"
                     placeholder="O que está acontecendo?"
                     onChange={this.handleNovoTweetChange}
+                    value={this.state.novoTweet}
                   />
                 </div>
                 <button
@@ -122,4 +126,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Home;
