@@ -50,7 +50,7 @@ class LoginPage extends Component {
       this.props.history.push('/');
     }).catch((errorObj) => {
       this.setState({
-        erroMsg: `Status: ${errorObj.status}. ${errorObj.payload.message}`
+        erroMsg: `${errorObj.status} - ${errorObj.payload.message}`
       });
     });
   }
