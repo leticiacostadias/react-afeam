@@ -3,10 +3,12 @@ import React, { Component, Fragment } from 'react';
 import Cabecalho from '../components/Cabecalho'
 import NavMenu from '../components/NavMenu'
 import Dashboard from '../components/Dashboard'
-import Widget from '../components/Widget'
+// import Widget from '../components/Widget'
 import TrendsArea from '../components/TrendsArea'
-import Tweet from '../components/Tweet'
+// import Tweet from '../components/Tweet'
 import If from '../components/If';
+
+import { Tweet, Widget } from '../components';
 
 class Home extends Component {
   // constructor () {
