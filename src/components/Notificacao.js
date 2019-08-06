@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function({ mensagem, limpaMensagem }) {
+export function Notificacao ({ mensagem, limpaMensagem }) {
     return (
         <div
           className="notificacaoMsg"
