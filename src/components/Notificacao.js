@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function Notificacao ({ mensagem, limpaMensagem }) {
+export default function Notificacao ({ mensagem, limpaMensagem }) {
     return (
         <div
           className="notificacaoMsg"
