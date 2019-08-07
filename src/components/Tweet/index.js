@@ -54,6 +54,9 @@ class Tweet extends Component {
             </svg>
             {totalLikes}
           </button>
+          <button className="btn btn--blue btn--remove">
+            X
+          </button>
         </footer>
       </article>
     )

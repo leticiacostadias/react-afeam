@@ -27,12 +27,43 @@ class Home extends Component {
 
     // this.handleNovoTweetChange = this.handleNovoTweetChange.bind(this);
   // }
+  
   static contextType = NotificaoContext;
-
+  
   state = {
     novoTweet: '',
-    tweets: []
+    tweets: [],
+    loading: true
   }
+  
+  // DEPRECATED_componentWillMount()
+  componentDidMount() {
+    // buscar os tweets
+    tweetService.listaTweets()
+      .then(listaDeTweets => {
+        console.log(listaDeTweets);
+        
+        this.setState({
+          tweets: listaDeTweets,
+          loading: false
+        });
+      });
+  }
+
+  // componentShouldUpdate()
+  // DEPRECATED_componentWillUpdate()
+  // componentDidUpdate() {
+  //   // console.log('algo mudou')
+
+  //   // if (1 === 2) {
+  //   //   this.setState({ novoTweet: '' });
+  //   // }
+  // }
+
+  // componentWillUnmount() {
+  //   console.log('vou morrer');
+  // }
+  // DEPRECATED_componentDidUnmount()
 
   handleNovoTweetChange = (evento) => {
     // console.log(this);
@@ -72,7 +103,9 @@ class Home extends Component {
   render() {
     // console.log(this.state.novoTweet);
     // console.log(this.state.tweets);
-    const { novoTweet, tweets } = this.state;
+    const { novoTweet, tweets, loading } = this.state;
+
+    if (loading) return <p>Carregando</p>;
 
     return (
       <Fragment>

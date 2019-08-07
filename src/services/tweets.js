@@ -16,6 +16,13 @@ const TweetService = {
 
       return resposta.json();
     });
+  },
+
+  listaTweets () {
+    const token = localStorage.getItem('token');
+
+    return fetch(`http://twitelum-api.herokuapp.com/tweets?X-AUTH-TOKEN=${token}`)
+      .then(resposta => resposta.json());
   }
 }
 
