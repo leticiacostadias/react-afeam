@@ -12,6 +12,7 @@ import {
   Cabecalho,
   Tweet,
   Widget,
+  Modal,
   NavMenu,
   Dashboard,
   TrendsArea,
@@ -197,7 +198,7 @@ class Home extends Component {
         </div>
         <Modal
           estaAberto={true}
-          fechaModal={() => {}}
+          fechaModal={() => { console.log('fecha o modal!') }}
         >
           conteudo do modal
         </Modal>
