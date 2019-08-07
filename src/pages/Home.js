@@ -42,16 +42,18 @@ class Home extends Component {
   handleCriaTweet = (evento) => {
     evento.preventDefault();
 
+    const { novoTweet, tweets } = this.state;
+
     // console.log(this.state.novoTweet);
     // this.state.tweets.push(this.state.novoTweet);
 
-    tweetService.criaTweet(this.state.novoTweet)
+    tweetService.criaTweet(novoTweet)
       .then(tweetCriado => {
         console.log(tweetCriado);
         
         // spread operator
         this.setState({
-          tweets: [ tweetCriado, ...this.state.tweets ],
+          tweets: [ tweetCriado, ...tweets ],
           novoTweet: ''
         });
 
@@ -70,6 +72,7 @@ class Home extends Component {
   render() {
     // console.log(this.state.novoTweet);
     // console.log(this.state.tweets);
+    const { novoTweet, tweets } = this.state;
 
     return (
       <Fragment>
@@ -84,13 +87,13 @@ class Home extends Component {
                   <span
                     className={`novoTweet__status ${this.novoTweetValido() ? '' : 'novoTweet__status--invalido'}`}
                   >
-                    {this.state.novoTweet.length}/140
+                    {novoTweet.length}/140
                   </span>
                   <textarea
                     className="novoTweet__editor"
                     placeholder="O que está acontecendo?"
                     onChange={this.handleNovoTweetChange}
-                    value={this.state.novoTweet}
+                    value={novoTweet}
                   />
                 </div>
                 <button
@@ -125,17 +128,19 @@ class Home extends Component {
               { /* truthy */ }
               {/* {this.state.tweets.length === 0 && 'Twite alguma coisa!'} */}
 
-              <If condition={this.state.tweets.length === 0}>
+              <If condition={tweets.length === 0}>
                 Twite alguma coisa!
               </If>
 
               <div className="tweetsArea">
-                {this.state.tweets.map(tweet => (
+                {tweets.map(tweet => (
                   <Tweet
                     key={tweet._id}
-                    nomeUsuario="Felizberto da Silva"
-                    usuario="felizberto"
-                    avatarURL="https://bit.ly/2YLM3Ii"
+                    nomeUsuario={`${tweet.usuario.nome} ${tweet.usuario.sobrenome}`}
+                    usuario={tweet.usuario.login}
+                    avatarURL={tweet.usuario.foto}
+                    totalLikes={tweet.totalLikes}
+                    likeado={tweet.likeado}
                   >
                     {tweet.conteudo}
                   </Tweet>
