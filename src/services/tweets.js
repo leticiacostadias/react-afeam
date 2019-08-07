@@ -37,6 +37,10 @@ const TweetService = {
       }
     }).then(resposta => resposta.json());
   },
+
+  excluirTweet() {
+    // DELETE http://twitelum-api.herokuapp.com/tweets/${id}?X-AUTH-TOKEN=${token}
+  }
 }
 
 export default TweetService;
