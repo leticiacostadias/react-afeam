@@ -38,8 +38,13 @@ const TweetService = {
     }).then(resposta => resposta.json());
   },
 
-  excluirTweet() {
+  excluirTweet(idDoTweet) {
     // DELETE http://twitelum-api.herokuapp.com/tweets/${id}?X-AUTH-TOKEN=${token}
+    const token = localStorage.getItem('token');
+
+    return fetch(`http://twitelum-api.herokuapp.com/tweets/${idDoTweet}?X-AUTH-TOKEN=${token}`, {
+      method: 'DELETE'
+    }).then(resposta => resposta.json());
   }
 }
 

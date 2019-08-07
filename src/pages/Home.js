@@ -23,19 +23,19 @@ import tweetService from '../services/tweets';
 
 class Home extends Component {
   // constructor () {
-    // super();
+  // super();
 
-    // this.handleNovoTweetChange = this.handleNovoTweetChange.bind(this);
+  // this.handleNovoTweetChange = this.handleNovoTweetChange.bind(this);
   // }
-  
+
   static contextType = NotificaoContext;
-  
+
   state = {
     novoTweet: '',
     tweets: [],
     loading: true
   }
-  
+
   // DEPRECATED_componentWillMount()
   componentDidMount() {
     // buscar os tweets
@@ -81,10 +81,10 @@ class Home extends Component {
     tweetService.criaTweet(novoTweet)
       .then(tweetCriado => {
         // console.log(tweetCriado);
-        
+
         // spread operator
         this.setState({
-          tweets: [ tweetCriado, ...tweets ],
+          tweets: [tweetCriado, ...tweets],
           novoTweet: ''
         });
 
@@ -94,8 +94,18 @@ class Home extends Component {
     // this.setState({ tweets: this.state.tweets });
   }
 
+  handleExcluirTweet = (idDoTweetExcluido) => {
+    const { tweets } = this.state;
+
+    this.setState({
+      tweets: tweets
+        .filter(item => item._id !== idDoTweetExcluido)
+    });
+    this.context.setMensagem('Tweet excluído com sucesso');
+  }
+
   novoTweetValido = () => {
-    const { length: novoTweetLenght} = this.state.novoTweet;
+    const { length: novoTweetLenght } = this.state.novoTweet;
 
     return novoTweetLenght > 0 && novoTweetLenght <= 140;
   }
@@ -158,7 +168,7 @@ class Home extends Component {
                   ))}
                 </div>
               )} */}
-              { /* truthy */ }
+              { /* truthy */}
               {/* {this.state.tweets.length === 0 && 'Twite alguma coisa!'} */}
 
               <If condition={tweets.length === 0}>
@@ -176,6 +186,7 @@ class Home extends Component {
                     totalLikes={tweet.totalLikes}
                     likeado={tweet.likeado}
                     removivel={tweet.removivel}
+                    onExcluir={this.handleExcluirTweet}
                   >
                     {tweet.conteudo}
                   </Tweet>

@@ -33,6 +33,15 @@ class Tweet extends Component {
       });
   }
 
+  handleExcluir = () => {
+    const { id, onExcluir } = this.props;
+
+    tweetService.excluirTweet(id)
+      .then(() => {
+        onExcluir(id);
+      });
+  }
+
   render() {
     const {
       avatarURL,
@@ -78,7 +87,7 @@ class Tweet extends Component {
             {totalLikes}
           </button>
           {removivel && (
-            <button className="btn btn--blue btn--remove">
+            <button className="btn btn--blue btn--remove" onClick={this.handleExcluir}>
               X
             </button>
           )}
