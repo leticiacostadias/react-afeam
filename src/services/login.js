@@ -1,7 +1,7 @@
 const LoginService = {
   logar(login, senha) {
     // fetch -> axios
-    return fetch('http://api-twitelum.herokuapp.com/login', {
+    return fetch('http://twitelum-api.herokuapp.com/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
