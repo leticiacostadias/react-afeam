@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Cabecalho, Widget } from '../../components'
+import { Cabecalho, InputField, Widget } from '../../components'
 
 import './loginPage.css'
 
@@ -123,30 +123,24 @@ class LoginPage extends Component {
                 className="loginPage__form"
                 onSubmit={this.handleLogar}
               >
-                <div className="loginPage__inputWrap">
-                  <label className="loginPage__label" htmlFor="login">Login</label>
-                  <input
-                    ref="login"
-                    className="loginPage__input"
-                    type="text"
-                    id="login"
-                    name="login"
-                    value={this.state.inputValues.login}
-                    onChange={this.handleInputChange}
-                  />
-                </div>
-                <div className="loginPage__inputWrap">
-                  <label className="loginPage__label" htmlFor="senha">Senha</label>
-                  <input
-                    ref="senha"
-                    className="loginPage__input"
-                    type="password"
-                    id="senha"
-                    name="senha"
-                    value={this.state.inputValues.senha}
-                    onChange={this.handleInputChange}
-                  />
-                </div>
+                <InputField
+                  label="Login"
+                  id="login"
+                  type="text"
+                  value={this.state.inputValues.login}
+                  onChange={this.handleInputChange}
+                  error={this.state.inputErrors.login}
+                />
+
+                <InputField
+                  label="Senha"
+                  id="senha"
+                  type="password"
+                  value={this.state.inputValues.senha}
+                  onChange={this.handleInputChange}
+                  error={this.state.inputErrors.senha}
+                />
+
                 {erroMsg && (
                   <div className="loginPage__errorBox">
                     {erroMsg}

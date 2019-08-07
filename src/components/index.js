@@ -1,6 +1,7 @@
 export { default as Cabecalho } from './Cabecalho';
 export { default as Dashboard } from './Dashboard';
 export { default as If } from './If';
+export { default as InputField } from './InputField';
 export { default as NavMenu } from './NavMenu';
 export { default as Notificacao } from './Notificacao';
 export { default as TrendsArea } from './TrendsArea';
