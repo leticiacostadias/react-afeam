@@ -25,8 +25,7 @@ class LoginPage extends Component {
     evento.preventDefault();
 
     // pegar usuario e senha
-    const login = this.refs.login.value;
-    const senha = this.refs.senha.value;
+    const { login, senha } = this.state.inputValues;
 
     // testar usuario e senha para logar
     // usar a API
