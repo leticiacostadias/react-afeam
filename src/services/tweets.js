@@ -15,7 +15,7 @@ const TweetService = {
       console.log(resposta);
 
       return resposta.json();
-    }).then(data => console.log(data));
+    });
   }
 }
 

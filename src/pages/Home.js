@@ -19,6 +19,7 @@ import {
 } from '../components';
 
 import { NotificaoContext } from './../contexts/NotificacaoContext';
+import tweetService from '../services/tweets';
 
 class Home extends Component {
   // constructor () {
@@ -44,13 +45,19 @@ class Home extends Component {
     // console.log(this.state.novoTweet);
     // this.state.tweets.push(this.state.novoTweet);
 
-    // spread operator
-    this.setState({
-      tweets: [ this.state.novoTweet, ...this.state.tweets ],
-      novoTweet: ''
-    });
+    tweetService.criaTweet(this.state.novoTweet)
+      .then(tweetCriado => {
+        console.log(tweetCriado);
+        
+        // spread operator
+        this.setState({
+          tweets: [ tweetCriado, ...this.state.tweets ],
+          novoTweet: ''
+        });
 
-    this.context.setMensagem('Novo tweet criado');
+        this.context.setMensagem('Novo tweet criado');
+      });
+
     // this.setState({ tweets: this.state.tweets });
   }
 
@@ -123,13 +130,14 @@ class Home extends Component {
               </If>
 
               <div className="tweetsArea">
-                {this.state.tweets.map((tweet) => (
+                {this.state.tweets.map(tweet => (
                   <Tweet
+                    key={tweet._id}
                     nomeUsuario="Felizberto da Silva"
                     usuario="felizberto"
                     avatarURL="https://bit.ly/2YLM3Ii"
                   >
-                    {tweet}
+                    {tweet.conteudo}
                   </Tweet>
                 ))}
               </div>
