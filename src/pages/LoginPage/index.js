@@ -10,7 +10,15 @@ class LoginPage extends Component {
   static contextType = NotificaoContext;
 
   state = {
-    erroMsg: ''
+    erroMsg: '',
+    inputValues: {
+      login: '',
+      senha: ''
+    },
+    inputErrors: {
+      login: '',
+      senha: ''
+    }
   }
 
   handleLogar = (evento) => {
@@ -71,6 +79,36 @@ class LoginPage extends Component {
     // });
   }
 
+  handleInputChange = ({ target }) => {
+    const { value, name } = target;
+
+    this.setState({
+      inputValues: {
+        ...this.state.inputValues,
+        [name]: value
+      }
+    }, () => this.formValidation());
+  }
+
+  formValidation = () => {
+    const { login, senha } = this.state.inputValues;
+    const newInputErrors = {};
+
+    if (!login) {
+      // login tem um erro
+      newInputErrors.login = 'Campo obrigatório';
+    }
+
+    if (!senha || senha.length < 6) {
+      // senha tem um erro
+      newInputErrors.senha = 'A senha deve ter pelo menos 6 caracteres';
+    }
+
+    this.setState({
+      inputErrors: newInputErrors
+    });
+  }
+
   render() {
     const { erroMsg } = this.state;
 
@@ -87,11 +125,27 @@ class LoginPage extends Component {
               >
                 <div className="loginPage__inputWrap">
                   <label className="loginPage__label" htmlFor="login">Login</label>
-                  <input ref="login" className="loginPage__input" type="text" id="login" name="login" />
+                  <input
+                    ref="login"
+                    className="loginPage__input"
+                    type="text"
+                    id="login"
+                    name="login"
+                    value={this.state.inputValues.login}
+                    onChange={this.handleInputChange}
+                  />
                 </div>
                 <div className="loginPage__inputWrap">
                   <label className="loginPage__label" htmlFor="senha">Senha</label>
-                  <input ref="senha" className="loginPage__input" type="password" id="senha" name="senha" />
+                  <input
+                    ref="senha"
+                    className="loginPage__input"
+                    type="password"
+                    id="senha"
+                    name="senha"
+                    value={this.state.inputValues.senha}
+                    onChange={this.handleInputChange}
+                  />
                 </div>
                 {erroMsg && (
                   <div className="loginPage__errorBox">
