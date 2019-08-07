@@ -42,7 +42,7 @@ class Home extends Component {
     tweetService.listaTweets()
       .then(listaDeTweets => {
         console.log(listaDeTweets);
-        
+
         this.setState({
           tweets: listaDeTweets,
           loading: false
@@ -80,7 +80,7 @@ class Home extends Component {
 
     tweetService.criaTweet(novoTweet)
       .then(tweetCriado => {
-        console.log(tweetCriado);
+        // console.log(tweetCriado);
         
         // spread operator
         this.setState({
@@ -174,6 +174,7 @@ class Home extends Component {
                     avatarURL={tweet.usuario.foto}
                     totalLikes={tweet.totalLikes}
                     likeado={tweet.likeado}
+                    removivel={tweet.removivel}
                   >
                     {tweet.conteudo}
                   </Tweet>

@@ -11,12 +11,17 @@ class Tweet extends Component {
     return classes.join(' ');
   }
 
+  handleCurtir = () => {
+    
+  }
+
   render() {
     const {
       avatarURL,
       nomeUsuario,
       usuario,
       totalLikes,
+      removivel,
       children
     } = this.props;
 
@@ -37,7 +42,7 @@ class Tweet extends Component {
           <span>{children}</span>
         </p>
         <footer className="tweet__footer">
-          <button className="btn btn--clean">
+          <button className="btn btn--clean" onClick={this.handleCurtir}>
             <svg
               className={this.likeIconClasses()}
               xmlns="http://www.w3.org/2000/svg"
@@ -54,9 +59,11 @@ class Tweet extends Component {
             </svg>
             {totalLikes}
           </button>
-          <button className="btn btn--blue btn--remove">
-            X
-          </button>
+          {removivel && (
+            <button className="btn btn--blue btn--remove">
+              X
+            </button>
+          )}
         </footer>
       </article>
     )
