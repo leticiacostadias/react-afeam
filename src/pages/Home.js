@@ -169,6 +169,7 @@ class Home extends Component {
                 {tweets.map(tweet => (
                   <Tweet
                     key={tweet._id}
+                    id={tweet._id}
                     nomeUsuario={`${tweet.usuario.nome} ${tweet.usuario.sobrenome}`}
                     usuario={tweet.usuario.login}
                     avatarURL={tweet.usuario.foto}

@@ -21,13 +21,22 @@ const TweetService = {
   listaTweets () {
     const token = localStorage.getItem('token');
 
+    // fazendo um GET
     return fetch(`http://twitelum-api.herokuapp.com/tweets?X-AUTH-TOKEN=${token}`)
       .then(resposta => resposta.json());
   },
 
-  curtirTweet () {
+  curtirTweet (idDoTweet) {
+    const token = localStorage.getItem('token');
+
     // POST http://twitelum-api.herokuapp.com/tweets/${id}/like?X-AUTH-TOKEN=${token}
-  }
+    return fetch(`http://twitelum-api.herokuapp.com/tweets/${idDoTweet}/like?X-AUTH-TOKEN=${token}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(resposta => resposta.json());
+  },
 }
 
 export default TweetService;

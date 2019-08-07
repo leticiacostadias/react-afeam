@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import './tweet.css'
 
+import tweetService from '../../services/tweets';
+
 class Tweet extends Component {
+  state = {
+    likeado: this.props.likeado,
+    totalLikes: this.props.totalLikes
+  }
+
   likeIconClasses = () => {
     const classes = ['icon', 'icon--small', 'iconHeart'];
-    const { likeado } = this.props;
+    const { likeado } = this.state;
 
     if (likeado) classes.push('iconHeart--active');
 
@@ -12,7 +19,18 @@ class Tweet extends Component {
   }
 
   handleCurtir = () => {
-    
+    const { id } = this.props;
+
+    tweetService.curtirTweet(id)
+      .then(() => {
+        // console.log(data);
+        const { likeado, totalLikes } = this.state;
+
+        this.setState({
+          likeado: !likeado,
+          totalLikes: totalLikes + (likeado ? -1 : 1)
+        });
+      });
   }
 
   render() {
@@ -20,10 +38,10 @@ class Tweet extends Component {
       avatarURL,
       nomeUsuario,
       usuario,
-      totalLikes,
       removivel,
       children
     } = this.props;
+    const { totalLikes } = this.state;
 
     return (
       <article className="tweet">
