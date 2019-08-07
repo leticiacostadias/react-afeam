@@ -195,6 +195,12 @@ class Home extends Component {
             </Widget>
           </Dashboard>
         </div>
+        <Modal
+          estaAberto={true}
+          fechaModal={() => {}}
+        >
+          conteudo do modal
+        </Modal>
       </Fragment>
     );
   }
