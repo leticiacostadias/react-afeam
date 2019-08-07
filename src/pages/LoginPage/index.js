@@ -3,7 +3,12 @@ import { Cabecalho, Widget } from '../../components'
 
 import './loginPage.css'
 
+import loginService from '../../services/login';
+import { NotificaoContext } from '../../contexts/NotificacaoContext'
+
 class LoginPage extends Component {
+  static contextType = NotificaoContext;
+
   state = {
     erroMsg: ''
   }
@@ -17,42 +22,53 @@ class LoginPage extends Component {
 
     // testar usuario e senha para logar
     // usar a API
-    // fetch -> axios
-    fetch('http://api-twitelum.herokuapp.com/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        login,
-        senha
+    loginService.logar(login, senha)
+      .then(() => {
+        this.props.history.push('/');
+        this.context.setMensagem('Login realizado com sucesso!');
       })
-    }).then(async (resposta) => {
-      if (!resposta.ok) {
-        const errorObj = {
-          status: resposta.status,
-          payload: await resposta.json()
-        };
-
-        throw errorObj;
-      }
-
-      return resposta.json();
-    }).then(data => {
-      // console.log(data)
-
-      // salvar o token
-      // localStorage, cookie, sessionStorage
-      localStorage.setItem('token', data.token);
-
-      // redirecionar pro feed
-      // console.log(this.props);
-      this.props.history.push('/');
-    }).catch((errorObj) => {
-      this.setState({
-        erroMsg: `${errorObj.status} - ${errorObj.payload.message}`
+      .catch((errorObj) => {
+        this.setState({
+          erroMsg: `${errorObj.status} - ${errorObj.payload.message}`
+        });
       });
-    });
+
+    // fetch -> axios
+    // fetch('http://api-twitelum.herokuapp.com/login', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   body: JSON.stringify({
+    //     login,
+    //     senha
+    //   })
+    // }).then(async (resposta) => {
+    //   if (!resposta.ok) {
+    //     const errorObj = {
+    //       status: resposta.status,
+    //       payload: await resposta.json()
+    //     };
+
+    //     throw errorObj;
+    //   }
+
+    //   return resposta.json();
+    // }).then(data => {
+    //   // console.log(data)
+
+    //   // salvar o token
+    //   // localStorage, cookie, sessionStorage
+    //   localStorage.setItem('token', data.token);
+
+    //   // redirecionar pro feed
+    //   // console.log(this.props);
+    //   this.props.history.push('/');
+    // }).catch((errorObj) => {
+    //   this.setState({
+    //     erroMsg: `${errorObj.status} - ${errorObj.payload.message}`
+    //   });
+    // });
   }
 
   render() {
