@@ -21,14 +21,17 @@ import Roteamento from './routes';
 import { NotificaoContextProvider } from './contexts/NotificacaoContext';
 
 // REDUX
-import './store';
+import store from './store';
+import { Provider } from 'react-redux';
 
 ReactDOM.render(
-  <NotificaoContextProvider>
-    <BrowserRouter>
-      <Roteamento />
-    </BrowserRouter>
-  </NotificaoContextProvider>,
+  <Provider store={store}>
+    <NotificaoContextProvider>
+      <BrowserRouter>
+        <Roteamento />
+      </BrowserRouter>
+    </NotificaoContextProvider>
+  </Provider>,
   document.getElementById("root")
 );
 

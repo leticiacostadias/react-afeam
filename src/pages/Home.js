@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 
 // import Cabecalho from '../components/Cabecalho';
 // import NavMenu from '../components/NavMenu';
@@ -41,18 +42,18 @@ class Home extends Component {
   // DEPRECATED_componentWillMount()
   componentDidMount() {
     // esteja inscrito para receber as atualizações da store
-    window.store.subscribe(() => {
-      // object destructuring
-      const { lista } = window.store.getState().tweets;
+    // window.store.subscribe(() => {
+    //   // object destructuring
+    //   const { lista } = window.store.getState().tweets;
 
-      this.setState({ tweets: lista });
-    });
+    //   this.setState({ tweets: lista });
+    // });
 
     // buscar os tweets
     tweetService.listaTweets()
       .then(listaTweets => {
         // console.log(listaTweets);
-        window.store.dispatch({
+        this.props.dispatch({
           type: 'tweets/ATUALIZA_LISTA',
           listaTweets
         });
@@ -136,6 +137,8 @@ class Home extends Component {
       loading
     } = this.state;
 
+    console.log(this.props.listaTweets);
+
     if (loading) return <p>Carregando</p>;
 
     // console.log(tweetSelecionado);
@@ -194,12 +197,12 @@ class Home extends Component {
               { /* truthy */}
               {/* {this.state.tweets.length === 0 && 'Twite alguma coisa!'} */}
 
-              <If condition={tweets.length === 0}>
+              <If condition={this.props.listaTweets.length === 0}>
                 Twite alguma coisa!
               </If>
 
               <div className="tweetsArea">
-                {tweets.map(tweet => (
+                {this.props.listaTweets.map(tweet => (
                   <Tweet
                     key={tweet._id}
                     id={tweet._id}
@@ -243,4 +246,10 @@ class Home extends Component {
   }
 }
 
-export default Home;
+function mapStateToProps (stateDaStore) {
+  return {
+    listaTweets: stateDaStore.tweets.lista
+  };
+}
+
+export default connect(mapStateToProps)(Home);
