@@ -24,4 +24,8 @@ function InputField ({ label, id, type, value, onChange, required, error }) {
   );
 }
 
+InputField.propTypes = {};
+
+InputField.defaultProps = {};
+
 export default InputField;
