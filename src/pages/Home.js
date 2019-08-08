@@ -33,8 +33,9 @@ class Home extends Component {
 
   state = {
     novoTweet: '',
+    tweetSelecionado: null,
     tweets: [],
-    loading: true
+    loading: true,
   }
 
   // DEPRECATED_componentWillMount()
@@ -105,6 +106,10 @@ class Home extends Component {
     this.context.setMensagem('Tweet excluído com sucesso');
   }
 
+  handleSelecionaTweet = (tweet) => {
+    this.setState({ tweetSelecionado: tweet });
+  }
+
   novoTweetValido = () => {
     const { length: novoTweetLenght } = this.state.novoTweet;
 
@@ -114,7 +119,12 @@ class Home extends Component {
   render() {
     // console.log(this.state.novoTweet);
     // console.log(this.state.tweets);
-    const { novoTweet, tweets, loading } = this.state;
+    const {
+      novoTweet,
+      tweetSelecionado,
+      tweets,
+      loading
+    } = this.state;
 
     if (loading) return <p>Carregando</p>;
 
@@ -188,6 +198,7 @@ class Home extends Component {
                     likeado={tweet.likeado}
                     removivel={tweet.removivel}
                     onExcluir={this.handleExcluirTweet}
+                    onSelecionaTweet={() => this.handleSelecionaTweet(tweet)}
                   >
                     {tweet.conteudo}
                   </Tweet>
@@ -197,8 +208,8 @@ class Home extends Component {
           </Dashboard>
         </div>
         <Modal
-          estaAberto={true}
-          fechaModal={() => { console.log('fecha o modal!') }}
+          estaAberto={tweetSelecionado}
+          fechaModal={() => this.setState({ tweetSelecionado: null })}
         >
           conteudo do modal
         </Modal>

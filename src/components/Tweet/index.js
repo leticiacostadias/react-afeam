@@ -42,6 +42,13 @@ class Tweet extends Component {
       });
   }
 
+  handleSelecionaTweet = ({ target }) => {
+    if (target.closest('.tweet__footer')) return;
+
+    // atualizar o estado da Home
+    this.props.onSelecionaTweet();
+  }
+
   render() {
     const {
       avatarURL,
@@ -53,7 +60,7 @@ class Tweet extends Component {
     const { totalLikes } = this.state;
 
     return (
-      <article className="tweet">
+      <article className="tweet" onClick={this.handleSelecionaTweet}>
         <div className="tweet__cabecalho">
           <img
             className="tweet__fotoUsuario"
