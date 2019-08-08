@@ -43,7 +43,7 @@ class Home extends Component {
     // buscar os tweets
     tweetService.listaTweets()
       .then(listaDeTweets => {
-        console.log(listaDeTweets);
+        // console.log(listaDeTweets);
 
         this.setState({
           tweets: listaDeTweets,
@@ -129,7 +129,7 @@ class Home extends Component {
 
     if (loading) return <p>Carregando</p>;
 
-    console.log(tweetSelecionado);
+    // console.log(tweetSelecionado);
 
     return (
       <Fragment>

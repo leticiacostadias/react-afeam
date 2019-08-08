@@ -11,11 +11,7 @@ const TweetService = {
       body: JSON.stringify({
         conteudo: novoTweet
       })
-    }).then((resposta) => {
-      console.log(resposta);
-
-      return resposta.json();
-    });
+    }).then(resposta => resposta.json());
   },
 
   listaTweets () {
