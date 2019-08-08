@@ -41,7 +41,12 @@ class Home extends Component {
   // DEPRECATED_componentWillMount()
   componentDidMount() {
     // esteja inscrito para receber as atualizações da store
-    store.subscribe();
+    window.store.subscribe(() => {
+      // object destructuring
+      const { lista } = window.store.getState().tweets;
+
+      this.setState({ tweets: lista });
+    });
 
     // buscar os tweets
     tweetService.listaTweets()
