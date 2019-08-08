@@ -100,6 +100,7 @@ class Home extends Component {
     const { tweets } = this.state;
 
     this.setState({
+      tweetSelecionado: null,
       tweets: tweets
         .filter(item => item._id !== idDoTweetExcluido)
     });
@@ -127,6 +128,8 @@ class Home extends Component {
     } = this.state;
 
     if (loading) return <p>Carregando</p>;
+
+    console.log(tweetSelecionado);
 
     return (
       <Fragment>
@@ -211,7 +214,20 @@ class Home extends Component {
           estaAberto={tweetSelecionado}
           fechaModal={() => this.setState({ tweetSelecionado: null })}
         >
-          conteudo do modal
+          {tweetSelecionado && (
+            <Tweet
+              id={tweetSelecionado._id}
+              nomeUsuario={`${tweetSelecionado.usuario.nome} ${tweetSelecionado.usuario.sobrenome}`}
+              usuario={tweetSelecionado.usuario.login}
+              avatarURL={tweetSelecionado.usuario.foto}
+              totalLikes={tweetSelecionado.totalLikes}
+              likeado={tweetSelecionado.likeado}
+              removivel={tweetSelecionado.removivel}
+              onExcluir={this.handleExcluirTweet}
+            >
+              {tweetSelecionado.conteudo}
+            </Tweet>
+          )}
         </Modal>
       </Fragment>
     );

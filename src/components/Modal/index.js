@@ -17,7 +17,7 @@ export default function Modal ({ children, estaAberto, fechaModal }) {
     >
       <div className="modal__conteudo">
         <Widget>
-          {children}
+          {estaAberto && children}
         </Widget>
       </div>
     </div>
