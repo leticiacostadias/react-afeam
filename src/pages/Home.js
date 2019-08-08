@@ -217,7 +217,6 @@ class Home extends Component {
           {tweetSelecionado && (
             <Tweet
               id={tweetSelecionado._id}
-              nomeUsuario={`${tweetSelecionado.usuario.nome} ${tweetSelecionado.usuario.sobrenome}`}
               usuario={tweetSelecionado.usuario.login}
               avatarURL={tweetSelecionado.usuario.foto}
               totalLikes={tweetSelecionado.totalLikes}
