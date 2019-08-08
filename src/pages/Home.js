@@ -40,15 +40,19 @@ class Home extends Component {
 
   // DEPRECATED_componentWillMount()
   componentDidMount() {
+    // esteja inscrito para receber as atualizações da store
+    store.subscribe();
+
     // buscar os tweets
     tweetService.listaTweets()
-      .then(listaDeTweets => {
-        // console.log(listaDeTweets);
-
-        this.setState({
-          tweets: listaDeTweets,
-          loading: false
+      .then(listaTweets => {
+        // console.log(listaTweets);
+        window.store.dispatch({
+          type: 'tweets/ATUALIZA_LISTA',
+          listaTweets
         });
+
+        this.setState({ loading: false });
       });
   }
 
