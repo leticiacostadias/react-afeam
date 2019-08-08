@@ -215,7 +215,7 @@ class Home extends Component {
                     onExcluir={this.handleExcluirTweet}
                     onSelecionaTweet={() => this.handleSelecionaTweet(tweet)}
                   >
-                    {tweet.conteudo.novoTweet || tweet.conteudo}
+                    {tweet.conteudo}
                   </Tweet>
                 ))}
               </div>
@@ -237,7 +237,7 @@ class Home extends Component {
               removivel={tweetSelecionado.removivel}
               onExcluir={this.handleExcluirTweet}
             >
-              {tweetSelecionado.conteudo.novoTweet || tweetSelecionado.conteudo}
+              {tweetSelecionado.conteudo}
             </Tweet>
           )}
         </Modal>
