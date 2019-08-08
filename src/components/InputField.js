@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function InputField ({ label, id, type, value, onChange, required, error }) {
   return (
@@ -24,8 +25,22 @@ function InputField ({ label, id, type, value, onChange, required, error }) {
   );
 }
 
-InputField.propTypes = {};
+InputField.propTypes = {
+  label: PropTypes.node.isRequired,
+  id: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 
-InputField.defaultProps = {};
+  error: PropTypes.string,
+  value: PropTypes.string,
+  type: PropTypes.string,
+  required: PropTypes.bool,
+};
+
+InputField.defaultProps = {
+  error: '',
+  value: '',
+  type: 'text',
+  required: false
+};
 
 export default InputField;

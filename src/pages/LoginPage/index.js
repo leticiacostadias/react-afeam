@@ -125,7 +125,6 @@ class LoginPage extends Component {
                 <InputField
                   label="Login"
                   id="login"
-                  type="text"
                   value={this.state.inputValues.login}
                   onChange={this.handleInputChange}
                   error={this.state.inputErrors.login}

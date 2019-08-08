@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Widget } from '../.'; 
 
 import './modal.css';
@@ -22,4 +23,16 @@ export default function Modal ({ children, estaAberto, fechaModal }) {
       </div>
     </div>
   );
+};
+
+Modal.propTypes = {
+  fechaModal: PropTypes.func.isRequired,
+  
+  children: PropTypes.node,
+  estaAberto: PropTypes.bool,
+};
+
+Modal.defaultProps = {
+  estaAberto: false,
+  children: 'Conteúdo do modal'
 };

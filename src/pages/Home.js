@@ -211,12 +211,13 @@ class Home extends Component {
           </Dashboard>
         </div>
         <Modal
-          estaAberto={tweetSelecionado}
+          estaAberto={Boolean(tweetSelecionado)}
           fechaModal={() => this.setState({ tweetSelecionado: null })}
         >
           {tweetSelecionado && (
             <Tweet
               id={tweetSelecionado._id}
+              nomeUsuario={`${tweetSelecionado.usuario.nome} ${tweetSelecionado.usuario.sobrenome}`}
               usuario={tweetSelecionado.usuario.login}
               avatarURL={tweetSelecionado.usuario.foto}
               totalLikes={tweetSelecionado.totalLikes}

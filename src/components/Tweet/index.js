@@ -21,7 +21,7 @@ class Tweet extends Component {
   }
 
   static defaultProps = {
-    avatarURL: '',
+    avatarURL: 'https://bit.ly/1YLVjXx',
     removivel: false,
     likeado: false,
     totalLikes: 0,
