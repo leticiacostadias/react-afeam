@@ -85,7 +85,7 @@ class Home extends Component {
   handleCriaTweet = (evento) => {
     evento.preventDefault();
 
-    const { novoTweet, tweets } = this.state;
+    const { novoTweet } = this.state;
 
     // console.log(this.state.novoTweet);
     // this.state.tweets.push(this.state.novoTweet);
@@ -93,13 +93,13 @@ class Home extends Component {
     tweetService.criaTweet(novoTweet)
       .then(tweetCriado => {
         // console.log(tweetCriado);
-
-        // spread operator
-        this.setState({
-          tweets: [tweetCriado, ...tweets],
-          novoTweet: ''
+        this.props.dispatch({
+          type: 'tweets/NOVO_TWEET',
+          tweetCriado
         });
 
+        // spread operator
+        this.setState({ novoTweet: '' });
         this.context.setMensagem('Novo tweet criado');
       });
 

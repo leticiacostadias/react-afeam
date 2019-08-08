@@ -2,7 +2,10 @@ import { combineReducers, createStore } from 'redux';
 
 const stateInicial = {
   lista: [],
-  tweetSelecionado: null
+  tweetSelecionado: null,
+  retweets: {
+    ghsdg: ''
+  }
 };
 
 function tweetsReducer (state = stateInicial, action) {
@@ -11,6 +14,11 @@ function tweetsReducer (state = stateInicial, action) {
     return {
       ...state,
       lista: action.listaTweets
+    };
+  } else if (action.type === 'tweets/NOVO_TWEET') {
+    return {
+      ...state,
+      lista: [action.tweetCriado, ...state.lista]
     };
   }
 
