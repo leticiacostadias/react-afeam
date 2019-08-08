@@ -20,6 +20,9 @@ import Roteamento from './routes';
 
 import { NotificaoContextProvider } from './contexts/NotificacaoContext';
 
+// REDUX
+import './store';
+
 ReactDOM.render(
   <NotificaoContextProvider>
     <BrowserRouter>
