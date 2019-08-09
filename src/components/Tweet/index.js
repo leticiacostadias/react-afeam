@@ -128,4 +128,4 @@ class Tweet extends Component {
   }
 }
 
-export default Tweet
+export default Tweet;

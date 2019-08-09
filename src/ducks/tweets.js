@@ -6,11 +6,11 @@ export const actionTypes = {
 
   // novo action type
   excluir: 'tweets/EXCLUIR_TWEET',
+  curtir: 'tweets/CURTIR_TWEET'
 };
 
 export const ActionCreators = {
   atualizaTweets() {
-    // service
     return dispatch => {
       return tweetService.listaTweets()
         .then(listaTweets => {
@@ -41,7 +41,6 @@ export const ActionCreators = {
     }
   },
 
-  // criar nova action creator
   excluirTweet(idDoTweetExcluido) {
     return dispatch => {
       return tweetService.excluirTweet(idDoTweetExcluido)
@@ -82,6 +81,16 @@ export function tweetsReducer (state = stateInicial, action) {
           ...state,
           lista: state.lista
             .filter(tweet => tweet._id !== action.idDoTweetExcluido)
+        };
+      
+      case actionTypes.curtir:
+        // encontrar o tweet curtido
+        // alterar likeado e totalLikes
+        
+        // atualizar o state
+        return {
+          ...state,
+          // atualizar a lista de tweets
         };
 
       default: 
