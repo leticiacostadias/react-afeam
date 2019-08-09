@@ -1,10 +1,15 @@
 import tweetService from '../services/tweets';
 
-export function atualizaTweets(listaTweets) {
+export function atualizaTweets() {
   // service
-  return {
-    type: 'tweets/ATUALIZA_LISTA',
-    listaTweets
+  return (dispatch) => {
+    return tweetService.listaTweets()
+      .then(listaTweets => {
+        dispatch({
+          type: 'tweets/ATUALIZA_LISTA',
+          listaTweets
+        });
+      })
   }
 }
 

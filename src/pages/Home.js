@@ -21,7 +21,6 @@ import {
 } from '../components';
 
 import { NotificaoContext } from './../contexts/NotificacaoContext';
-import tweetService from '../services/tweets';
 
 import * as ActionCreators from '../actions/tweets';
 
@@ -52,15 +51,11 @@ class Home extends Component {
     // });
 
     // buscar os tweets
-    tweetService.listaTweets()
-      .then(listaTweets => {
-        // console.log(listaTweets);
-        this.props.dispatch(
-          ActionCreators.atualizaTweets(listaTweets)
-        );
-
-        this.setState({ loading: false });
-      });
+    this.props.dispatch(
+      ActionCreators.atualizaTweets()
+    ).then(() => {
+      this.setState({ loading: false });
+    });  
   }
 
   // componentShouldUpdate()
