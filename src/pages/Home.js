@@ -133,7 +133,6 @@ class Home extends Component {
     const {
       novoTweet,
       tweetSelecionado,
-      tweets,
       loading
     } = this.state;
 
