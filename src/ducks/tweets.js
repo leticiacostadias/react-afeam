@@ -3,7 +3,9 @@ import tweetService from '../services/tweets';
 export const actionTypes = {
   atualiza: 'tweets/ATUALIZA_LISTA',
   novo: 'tweets/NOVO_TWEET',
+
   // novo action type
+  excluir: 'tweets/EXCLUIR_TWEET',
 };
 
 export const ActionCreators = {
@@ -40,6 +42,17 @@ export const ActionCreators = {
   },
 
   // criar nova action creator
+  excluirTweet(idDoTweetExcluido) {
+    return dispatch => {
+      return tweetService.excluirTweet(idDoTweetExcluido)
+        .then(() => {
+          dispatch({
+            type: actionTypes.excluir,
+            idDoTweetExcluido
+          });
+        })
+    }
+  }
 };
 
 
@@ -64,6 +77,12 @@ export function tweetsReducer (state = stateInicial, action) {
           };
 
       // novo reduce handler
+      case actionTypes.excluir:
+        return {
+          ...state,
+          lista: state.lista
+            .filter(tweet => tweet._id !== action.idDoTweetExcluido)
+        };
 
       default: 
           return state;

@@ -60,10 +60,10 @@ class Tweet extends Component {
   handleExcluir = () => {
     const { id, onExcluir } = this.props;
 
-    tweetService.excluirTweet(id)
-      .then(() => {
-        onExcluir(id);
-      });
+    onExcluir(id);
+    // tweetService.excluirTweet(id)
+    //   .then(() => {
+    // });
   }
 
   handleSelecionaTweet = ({ target }) => {

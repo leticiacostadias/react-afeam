@@ -1,27 +1,17 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-// import Cabecalho from '../components/Cabecalho';
-// import NavMenu from '../components/NavMenu';
-// import Dashboard from '../components/Dashboard';
-// import Widget from '../components/Widget';
-// import TrendsArea from '../components/TrendsArea';
-// import Tweet from '../components/Tweet';
-// import If from '../components/If';
-
 import {
   Cabecalho,
-  Tweet,
   Widget,
-  Modal,
   NavMenu,
   Dashboard,
-  TrendsArea,
-  If
+  TrendsArea
 } from '../components';
 
-import { NotificaoContext } from './../contexts/NotificacaoContext';
+import TweetsContainer from '../containers/TweetsContainer';
 
+import { NotificaoContext } from './../contexts/NotificacaoContext';
 import { ActionCreators } from '../ducks/tweets';
 
 class Home extends Component {
@@ -35,8 +25,6 @@ class Home extends Component {
 
   state = {
     novoTweet: '',
-    tweetSelecionado: null,
-    tweets: [],
     loading: true,
   }
 
@@ -98,21 +86,6 @@ class Home extends Component {
     // this.setState({ tweets: this.state.tweets });
   }
 
-  handleExcluirTweet = (idDoTweetExcluido) => {
-    const { tweets } = this.state;
-
-    this.setState({
-      tweetSelecionado: null,
-      tweets: tweets
-        .filter(item => item._id !== idDoTweetExcluido)
-    });
-    this.context.setMensagem('Tweet excluído com sucesso');
-  }
-
-  handleSelecionaTweet = (tweet) => {
-    this.setState({ tweetSelecionado: tweet });
-  }
-
   novoTweetValido = () => {
     const { length: novoTweetLenght } = this.state.novoTweet;
 
@@ -122,11 +95,7 @@ class Home extends Component {
   render() {
     // console.log(this.state.novoTweet);
     // console.log(this.state.tweets);
-    const {
-      novoTweet,
-      tweetSelecionado,
-      loading
-    } = this.state;
+    const { novoTweet, loading } = this.state;
 
     // console.log(this.props.listaTweets);
 
@@ -171,76 +140,13 @@ class Home extends Component {
           </Dashboard>
           <Dashboard posicao="centro">
             <Widget>
-              {/* {this.state.tweets.length === 0 ?
-                'Tweet alguma coisa!' : (
-                <div className="tweetsArea">
-                  {this.state.tweets.map((tweet) => (
-                    <Tweet
-                      nomeUsuario="Felizberto da Silva"
-                      usuario="felizberto"
-                      avatarURL="https://bit.ly/2YLM3Ii"
-                    >
-                      {tweet}
-                    </Tweet>
-                  ))}
-                </div>
-              )} */}
-              { /* truthy */}
-              {/* {this.state.tweets.length === 0 && 'Twite alguma coisa!'} */}
-
-              <If condition={this.props.listaTweets.length === 0}>
-                Twite alguma coisa!
-              </If>
-
-              <div className="tweetsArea">
-                {this.props.listaTweets.map(tweet => (
-                  <Tweet
-                    key={tweet._id}
-                    id={tweet._id}
-                    nomeUsuario={`${tweet.usuario.nome} ${tweet.usuario.sobrenome}`}
-                    usuario={tweet.usuario.login}
-                    avatarURL={tweet.usuario.foto}
-                    totalLikes={tweet.totalLikes}
-                    likeado={tweet.likeado}
-                    removivel={tweet.removivel}
-                    onExcluir={this.handleExcluirTweet}
-                    onSelecionaTweet={() => this.handleSelecionaTweet(tweet)}
-                  >
-                    {tweet.conteudo}
-                  </Tweet>
-                ))}
-              </div>
+              <TweetsContainer />
             </Widget>
           </Dashboard>
         </div>
-        <Modal
-          estaAberto={Boolean(tweetSelecionado)}
-          fechaModal={() => this.setState({ tweetSelecionado: null })}
-        >
-          {tweetSelecionado && (
-            <Tweet
-              id={tweetSelecionado._id}
-              nomeUsuario={`${tweetSelecionado.usuario.nome} ${tweetSelecionado.usuario.sobrenome}`}
-              usuario={tweetSelecionado.usuario.login}
-              avatarURL={tweetSelecionado.usuario.foto}
-              totalLikes={tweetSelecionado.totalLikes}
-              likeado={tweetSelecionado.likeado}
-              removivel={tweetSelecionado.removivel}
-              onExcluir={this.handleExcluirTweet}
-            >
-              {tweetSelecionado.conteudo}
-            </Tweet>
-          )}
-        </Modal>
       </Fragment>
     );
   }
 }
 
-function mapStateToProps (stateDaStore) {
-  return {
-    listaTweets: stateDaStore.tweets.lista
-  };
-}
-
-export default connect(mapStateToProps)(Home);
+export default connect()(Home);
