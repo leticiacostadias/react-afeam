@@ -7,18 +7,13 @@ export const actionTypes = {
 };
 
 export const ActionCreators = {
-  atualizaTweets() {
-    // service
-    return dispatch => {
-      return tweetService.listaTweets()
-        .then(listaTweets => {
-          dispatch({
-            type: actionTypes.atualiza,
-            listaTweets
-          });
-        })
-    }
-  },
+  atualizaTweets: () => dispatch => tweetService.listaTweets()
+    .then(listaTweets => {
+      dispatch({
+        type: actionTypes.atualiza,
+        listaTweets
+      });
+    }),
 
   criaTweet(novoTweet) {
     return dispatch => {

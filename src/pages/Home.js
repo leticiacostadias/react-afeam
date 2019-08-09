@@ -22,7 +22,7 @@ import {
 
 import { NotificaoContext } from './../contexts/NotificacaoContext';
 
-import * as ActionCreators from '../actions/tweets';
+import { ActionCreators } from '../ducks/tweets';
 
 class Home extends Component {
   // constructor () {
