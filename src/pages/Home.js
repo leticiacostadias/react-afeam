@@ -91,18 +91,14 @@ class Home extends Component {
     // console.log(this.state.novoTweet);
     // this.state.tweets.push(this.state.novoTweet);
 
-    tweetService.criaTweet(novoTweet)
-      .then(tweetCriado => {
-        // console.log(tweetCriado);
-        this.props.dispatch({
-          type: 'tweets/NOVO_TWEET',
-          tweetCriado
-        });
+    this.props.dispatch(
+      ActionCreators.criaTweet(novoTweet)
+    ).then((x) => {
+      console.log(x);
 
-        // spread operator
-        this.setState({ novoTweet: '' });
-        this.context.setMensagem('Novo tweet criado');
-      });
+      this.setState({ novoTweet: '' });
+      this.context.setMensagem('Novo tweet criado');
+    });
 
     // this.setState({ tweets: this.state.tweets });
   }
