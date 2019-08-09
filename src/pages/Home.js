@@ -23,6 +23,8 @@ import {
 import { NotificaoContext } from './../contexts/NotificacaoContext';
 import tweetService from '../services/tweets';
 
+import * as ActionCreators from '../actions/tweets';
+
 class Home extends Component {
   // constructor () {
   // super();
@@ -53,10 +55,9 @@ class Home extends Component {
     tweetService.listaTweets()
       .then(listaTweets => {
         // console.log(listaTweets);
-        this.props.dispatch({
-          type: 'tweets/ATUALIZA_LISTA',
-          listaTweets
-        });
+        this.props.dispatch(
+          ActionCreators.atualizaTweets(listaTweets)
+        );
 
         this.setState({ loading: false });
       });
@@ -136,7 +137,7 @@ class Home extends Component {
       loading
     } = this.state;
 
-    console.log(this.props.listaTweets);
+    // console.log(this.props.listaTweets);
 
     if (loading) return <p>Carregando</p>;
 
