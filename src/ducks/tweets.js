@@ -51,6 +51,18 @@ export const ActionCreators = {
           });
         })
     }
+  },
+
+  curtirTweet(idDoTweetCurtido) {
+    return dispatch => {
+      return tweetService.curtirTweet(idDoTweetCurtido)
+        .then(() => {
+          dispatch({
+            type: actionTypes.curtir,
+            idDoTweetCurtido
+          });
+        })
+    }
   }
 };
 
@@ -85,11 +97,23 @@ export function tweetsReducer (state = stateInicial, action) {
       
       case actionTypes.curtir:
         // encontrar o tweet curtido
+        const tweetSelecionado = state.lista
+          .find(tweet => tweet._id === action.idDoTweetCurtido);
+
         // alterar likeado e totalLikes
-        
+        tweetSelecionado.totalLikes += tweetSelecionado.likeado ? -1 : 1;
+        tweetSelecionado.likeado = !tweetSelecionado.likeado
+
+        // QUEBRA
+        // tweetSelecionado = {
+        //   ...tweetSelecionado,
+        //   likeado: !tweetSelecionado.likeado,
+        //   totalLikes: tweetSelecionado.totalLikes + (tweetSelecionado.likeado ? -1 : 1)
+        // };
         // atualizar o state
         return {
           ...state,
+          lista: [...state.lista]
           // atualizar a lista de tweets
         };
 

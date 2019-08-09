@@ -22,7 +22,11 @@ class TweetsContainer extends Component {
     });
   }
 
-  handleCurtirTweet = () => {}
+  handleCurtirTweet = (idDoTweet) => {
+    this.props.dispatch(
+      ActionCreators.curtirTweet(idDoTweet)
+    );
+  }
 
   handleSelecionaTweet = (tweet) => {
     this.setState({ tweetSelecionado: tweet });
@@ -49,6 +53,7 @@ class TweetsContainer extends Component {
               likeado={tweet.likeado}
               removivel={tweet.removivel}
               onExcluir={this.handleExcluirTweet}
+              onCurtir={this.handleCurtirTweet}
               onSelecionaTweet={() => this.handleSelecionaTweet(tweet)}
             >
               {tweet.conteudo}
@@ -70,6 +75,7 @@ class TweetsContainer extends Component {
               likeado={tweetSelecionado.likeado}
               removivel={tweetSelecionado.removivel}
               onExcluir={this.handleExcluirTweet}
+              onCurtir={this.handleCurtirTweet}
             >
               {tweetSelecionado.conteudo}
             </Tweet>

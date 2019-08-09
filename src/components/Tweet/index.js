@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import './tweet.css'
 
-import tweetService from '../../services/tweets';
-
 class Tweet extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,
@@ -12,6 +10,7 @@ class Tweet extends Component {
     usuario: PropTypes.string.isRequired,
     children: PropTypes.node.isRequired,
     onExcluir: PropTypes.func.isRequired,
+    onCurtir: PropTypes.func.isRequired,
 
     avatarURL: PropTypes.string,
     removivel: PropTypes.bool,
@@ -28,14 +27,14 @@ class Tweet extends Component {
     onSelecionaTweet: () => {}
   }
 
-  state = {
-    likeado: this.props.likeado,
-    totalLikes: this.props.totalLikes
-  }
+  // state = {
+  //   likeado: this.props.likeado,
+  //   totalLikes: this.props.totalLikes
+  // }
 
   likeIconClasses = () => {
     const classes = ['icon', 'icon--small', 'iconHeart'];
-    const { likeado } = this.state;
+    const { likeado } = this.props;
 
     if (likeado) classes.push('iconHeart--active');
 
@@ -43,18 +42,19 @@ class Tweet extends Component {
   }
 
   handleCurtir = () => {
-    const { id } = this.props;
+    const { id, onCurtir } = this.props;
 
-    tweetService.curtirTweet(id)
-      .then(() => {
-        // console.log(data);
-        const { likeado, totalLikes } = this.state;
+    onCurtir(id);
+    // tweetService.curtirTweet(id)
+    //   .then(() => {
+    //     // console.log(data);
+    //     const { likeado, totalLikes } = this.props;
 
-        this.setState({
-          likeado: !likeado,
-          totalLikes: totalLikes + (likeado ? -1 : 1)
-        });
-      });
+    //     this.setState({
+    //       likeado: !likeado,
+    //       totalLikes: totalLikes + (likeado ? -1 : 1)
+    //     });
+    //   });
   }
 
   handleExcluir = () => {
@@ -81,7 +81,7 @@ class Tweet extends Component {
       removivel,
       children
     } = this.props;
-    const { totalLikes } = this.state;
+    const { totalLikes } = this.props;
 
     return (
       <article className="tweet" onClick={this.handleSelecionaTweet}>
