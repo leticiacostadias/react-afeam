@@ -2,7 +2,8 @@ import tweetService from '../services/tweets';
 
 export const actionTypes = {
   atualiza: 'tweets/ATUALIZA_LISTA',
-  novo: 'tweets/NOVO_TWEET'
+  novo: 'tweets/NOVO_TWEET',
+  // novo action type
 };
 
 export const ActionCreators = {
@@ -36,7 +37,9 @@ export const ActionCreators = {
           });
         });
     }
-  }
+  },
+
+  // criar nova action creator
 };
 
 
@@ -59,6 +62,8 @@ export function tweetsReducer (state = stateInicial, action) {
               ...state,
               lista: [action.tweetCriado, ...state.lista]
           };
+
+      // novo reduce handler
 
       default: 
           return state;
