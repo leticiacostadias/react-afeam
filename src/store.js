@@ -1,7 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import Thunk from 'redux-thunk';
 
-import tweetsReducer from './reducers/tweets';
+import { tweetsReducer } from './ducks/tweets';
 
 const store = createStore(
   combineReducers({
