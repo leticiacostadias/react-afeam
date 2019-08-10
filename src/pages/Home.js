@@ -28,7 +28,7 @@ class Home extends Component {
       ActionCreators.atualizaTweets()
     ).then(() => {
       this.setState({ loading: false });
-    });  
+    });
   }
 
   handleNovoTweetChange = (evento) => {
@@ -109,6 +109,8 @@ class Home extends Component {
 }
 
 function mapStateToProps(stateDaStore) {
+  console.log(stateDaStore);
+
   return {
     // [nomedaprop]: stateDaStore
     usuarioTag: stateDaStore.login.usuarioTag

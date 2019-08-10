@@ -1,4 +1,7 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
+import { persistReducer, persistStore } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+
 import Thunk from 'redux-thunk';
 
 import * as tweetsDuck from './ducks/tweets';
@@ -7,7 +10,6 @@ import * as loginDuck from './ducks/login';
 function createReducer (handler, initialState) {
   return function reducer (state = initialState, action) {
     const { type } = action;
-    // console.log(action);
 
     if (handler[type]) {
       return handler[type](state, action);
@@ -17,12 +19,20 @@ function createReducer (handler, initialState) {
   };
 }
 
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['login']
+};
+
+const rootReducer = combineReducers({
+  tweets: createReducer(tweetsDuck.actionHandler, tweetsDuck.initialState),
+  login: createReducer(loginDuck.actionHandler, loginDuck.initialState),
+});
+
 const store = createStore(
-  combineReducers({
-    tweets: createReducer(tweetsDuck.actionHandler, tweetsDuck.initialState),
-    login: createReducer(loginDuck.actionHandler, loginDuck.initialState),
-  }),
+  persistReducer(persistConfig, rootReducer),
   applyMiddleware(Thunk)
 );
 
-export default store;
+export default { store, persistor: persistStore(store) };

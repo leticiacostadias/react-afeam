@@ -20,15 +20,18 @@ import Roteamento from './routes';
 import { NotificaoContextProvider } from './contexts/NotificacaoContext';
 
 // REDUX
-import store from './store';
+import storeConfig from './store';
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={storeConfig.store}>
     <NotificaoContextProvider>
-      <BrowserRouter>
-        <Roteamento />
-      </BrowserRouter>
+      <PersistGate persistor={storeConfig.persistor}>
+        <BrowserRouter>
+          <Roteamento />
+        </BrowserRouter>
+      </PersistGate>
     </NotificaoContextProvider>
   </Provider>,
   document.getElementById("root")
