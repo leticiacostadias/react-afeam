@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import PropTypes from 'prop-types';
 
 import './tweet.css'
+import { NotificaoContext } from '../../contexts/NotificacaoContext';
 
 export default function Tweet(props) {
+  const [ curtidores, setCurtidores ] = useState([]);
+  // const { setMensagem } = useContext(NotificaoContext);
+
+  // console.log(value);
+
   const {
     id,
     avatarURL,
@@ -26,7 +32,10 @@ export default function Tweet(props) {
     return classes.join(' ');
   }
 
-  function handleCurtir() { onCurtir(id); }
+  function handleCurtir() {
+    onCurtir(id);
+    setCurtidores([ 'adalberto', ...curtidores ])
+  }
 
   function handleExcluir() { onExcluir(id); }
 
@@ -52,6 +61,8 @@ export default function Tweet(props) {
       <p className="tweet__conteudo">
         <span>{children}</span>
       </p>
+
+      <p>{curtidores.join(', ')}</p>
       <footer className="tweet__footer">
         <button className="btn btn--clean" onClick={handleCurtir}>
           <svg

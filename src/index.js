@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 // CSSs Globais
+// import './styles/index.css';
 import "./assets/css/reset.css";
 import "./assets/css/container.css";
 import "./assets/css/btn.css";
