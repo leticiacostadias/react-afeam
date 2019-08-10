@@ -65,7 +65,7 @@ export const ActionCreators = {
 };
 
 
-export const tweetsInitialState = {
+export const initialState = {
   lista: [],
   tweetSelecionado: null,
 };

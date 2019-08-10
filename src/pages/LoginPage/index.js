@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react'
-import { Cabecalho, InputField, Widget } from '../../components'
+import { connect } from 'react-redux';
 
+import { Cabecalho, InputField, Widget } from '../../components'
 import './loginPage.css'
 
-import loginService from '../../services/login';
 import { NotificaoContext } from '../../contexts/NotificacaoContext'
+import { actionCreators } from '../../ducks/login';
 
 class LoginPage extends Component {
   static contextType = NotificaoContext;
@@ -26,16 +27,16 @@ class LoginPage extends Component {
 
     const { login, senha } = this.state.inputValues;
 
-    loginService.logar(login, senha)
-      .then(() => {
-        this.props.history.push('/');
-        this.context.setMensagem('Login realizado com sucesso!');
-      })
-      .catch((errorObj) => {
-        this.setState({
-          erroMsg: `${errorObj.status} - ${errorObj.payload.message}`
-        });
+    this.props.dispatch(
+      actionCreators.logar(login, senha)
+    ).then(() => {
+      this.props.history.push('/');
+      this.context.setMensagem('Login realizado com sucesso!');
+    }).catch((errorObj) => {
+      this.setState({
+        erroMsg: `${errorObj.status} - ${errorObj.payload.message}`
       });
+    });
   }
 
   handleInputChange = ({ target }) => {
@@ -116,5 +117,4 @@ class LoginPage extends Component {
   }
 }
 
-
-export default LoginPage
+export default connect()(LoginPage);

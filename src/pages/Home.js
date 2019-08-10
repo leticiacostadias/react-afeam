@@ -58,13 +58,14 @@ class Home extends Component {
 
   render() {
     const { novoTweet, loading } = this.state;
+    const { usuarioTag } = this.props;
 
     if (loading) return <p>Carregando</p>;
 
     return (
       <Fragment>
         <Cabecalho>
-          <NavMenu usuario="@omariosouto" />
+          <NavMenu usuario={`@${usuarioTag}`} />
         </Cabecalho>
         <div className="container">
           <Dashboard>
@@ -107,4 +108,11 @@ class Home extends Component {
   }
 }
 
-export default connect()(Home);
+function mapStateToProps(stateDaStore) {
+  return {
+    // [nomedaprop]: stateDaStore
+    usuarioTag: stateDaStore.login.usuarioTag
+  };
+}
+
+export default connect(mapStateToProps)(Home);
