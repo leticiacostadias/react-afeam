@@ -65,45 +65,38 @@ export const ActionCreators = {
 };
 
 
-const stateInicial = {
+export const tweetsInitialState = {
   lista: [],
   tweetSelecionado: null,
 };
 
-export function tweetsReducer (state = stateInicial, action) {
-  switch (action.type) {
-      case actionTypes.atualiza:
-          return {
-              ...state,
-              lista: action.listaTweets
-          };
-  
-      case actionTypes.novo:
-          return {
-              ...state,
-              lista: [action.tweetCriado, ...state.lista]
-          };
+export const actionHandler = {
+  [actionTypes.atualiza]: (state, action) => ({
+    ...state,
+    lista: action.listaTweets
+  }),
 
-      case actionTypes.excluir:
-        return {
-          ...state,
-          lista: state.lista
-            .filter(tweet => tweet._id !== action.idDoTweetExcluido)
-        };
-      
-      case actionTypes.curtir:
-        const tweetSelecionado = state.lista
-          .find(tweet => tweet._id === action.idDoTweetCurtido);
+  [actionTypes.novo]: (state, action) => ({
+    ...state,
+    lista: [action.tweetCriado, ...state.lista]
+  }),
 
-        tweetSelecionado.totalLikes += tweetSelecionado.likeado ? -1 : 1;
-        tweetSelecionado.likeado = !tweetSelecionado.likeado
+  [actionTypes.excluir]: (state, action) => ({
+    ...state,
+    lista: state.lista
+      .filter(tweet => tweet._id !== action.idDoTweetExcluido)
+  }),
 
-        return {
-          ...state,
-          lista: [...state.lista]
-        };
+  [actionTypes.curtir]: (state, action) => {
+    const tweetSelecionado = state.lista
+      .find(tweet => tweet._id === action.idDoTweetCurtido);
 
-      default: 
-          return state;
+    tweetSelecionado.totalLikes += tweetSelecionado.likeado ? -1 : 1;
+    tweetSelecionado.likeado = !tweetSelecionado.likeado
+
+    return {
+      ...state,
+      lista: [...state.lista]
+    };
   }
-}
+};
