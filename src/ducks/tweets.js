@@ -4,10 +4,18 @@ export const actionTypes = {
   atualiza: 'tweets/ATUALIZA_LISTA',
   novo: 'tweets/NOVO_TWEET',
   excluir: 'tweets/EXCLUIR_TWEET',
-  curtir: 'tweets/CURTIR_TWEET'
+  curtir: 'tweets/CURTIR_TWEET',
+  recebe: 'tweets/RECEBE_TWEET'
 };
 
 export const ActionCreators = {
+  recebeTweet(tweet) {
+    return {
+      type: actionTypes.recebe,
+      novoTweet: tweet
+    };
+  },
+
   atualizaTweets() {
     return dispatch => {
       return tweetService.listaTweets()
@@ -98,5 +106,10 @@ export const actionHandler = {
       ...state,
       lista: [...state.lista]
     };
-  }
+  },
+
+  [actionTypes.recebe]: (state, action) => ({
+    ...state,
+    lista: [action.novoTweet, ...state.lista]
+  })
 };

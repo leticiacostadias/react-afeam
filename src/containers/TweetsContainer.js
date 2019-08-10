@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import socketIo from 'socket.io-client';
 
 import { If, Modal, Tweet } from '../components';
 
@@ -11,6 +12,25 @@ class TweetsContainer extends Component {
 
   state = {
     tweetSelecionado: null
+  }
+
+  socket = socketIo('http://localhost:9090');
+
+  componentDidMount() {
+    this.socket.emit('connect');
+
+    this.socket.on('newTweet', (mensagem) => {
+      console.log('um novo tweet foi criado');
+      console.log(mensagem);
+
+      this.props.dispatch(
+        ActionCreators.recebeTweet(mensagem)
+      );
+    });
+  }
+
+  componentWillUnmount() {
+    this.socket.emit('disconnect');
   }
 
   handleExcluirTweet = (idDoTweetExcluido) => {

@@ -2,7 +2,7 @@ const TweetService = {
   criaTweet (novoTweet) {
     const token = localStorage.getItem('token');
 
-    return fetch(`http://api-twitelum.herokuapp.com/tweets?X-AUTH-TOKEN=${token}`, {
+    return fetch(`http://localhost:8080/tweets?X-AUTH-TOKEN=${token}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -16,14 +16,14 @@ const TweetService = {
   listaTweets () {
     const token = localStorage.getItem('token');
 
-    return fetch(`http://api-twitelum.herokuapp.com/tweets?X-AUTH-TOKEN=${token}`)
+    return fetch(`http://localhost:8080/tweets?X-AUTH-TOKEN=${token}`)
       .then(resposta => resposta.json());
   },
 
   curtirTweet (idDoTweet) {
     const token = localStorage.getItem('token');
 
-    return fetch(`http://api-twitelum.herokuapp.com/tweets/${idDoTweet}/like?X-AUTH-TOKEN=${token}`, {
+    return fetch(`http://localhost:8080/tweets/${idDoTweet}/like?X-AUTH-TOKEN=${token}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ const TweetService = {
   excluirTweet(idDoTweet) {
     const token = localStorage.getItem('token');
 
-    return fetch(`http://api-twitelum.herokuapp.com/tweets/${idDoTweet}?X-AUTH-TOKEN=${token}`, {
+    return fetch(`http://localhost:8080/tweets/${idDoTweet}?X-AUTH-TOKEN=${token}`, {
       method: 'DELETE'
     }).then(resposta => resposta.json());
   }

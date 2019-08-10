@@ -1,6 +1,6 @@
 const LoginService = {
   logar(login, senha) {
-    return fetch('http://api-twitelum.herokuapp.com/login', {
+    return fetch('http://localhost:8080/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
