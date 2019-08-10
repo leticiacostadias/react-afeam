@@ -15,11 +15,6 @@ import { NotificaoContext } from './../contexts/NotificacaoContext';
 import { ActionCreators } from '../ducks/tweets';
 
 class Home extends Component {
-  // constructor () {
-  // super();
-
-  // this.handleNovoTweetChange = this.handleNovoTweetChange.bind(this);
-  // }
 
   static contextType = NotificaoContext;
 
@@ -28,17 +23,7 @@ class Home extends Component {
     loading: true,
   }
 
-  // DEPRECATED_componentWillMount()
   componentDidMount() {
-    // esteja inscrito para receber as atualizações da store
-    // window.store.subscribe(() => {
-    //   // object destructuring
-    //   const { lista } = window.store.getState().tweets;
-
-    //   this.setState({ tweets: lista });
-    // });
-
-    // buscar os tweets
     this.props.dispatch(
       ActionCreators.atualizaTweets()
     ).then(() => {
@@ -46,23 +31,7 @@ class Home extends Component {
     });  
   }
 
-  // componentShouldUpdate()
-  // DEPRECATED_componentWillUpdate()
-  // componentDidUpdate() {
-  //   // console.log('algo mudou')
-
-  //   // if (1 === 2) {
-  //   //   this.setState({ novoTweet: '' });
-  //   // }
-  // }
-
-  // componentWillUnmount() {
-  //   console.log('vou morrer');
-  // }
-  // DEPRECATED_componentDidUnmount()
-
   handleNovoTweetChange = (evento) => {
-    // console.log(this);
     this.setState({ novoTweet: evento.target.value });
   }
 
@@ -70,9 +39,6 @@ class Home extends Component {
     evento.preventDefault();
 
     const { novoTweet } = this.state;
-
-    // console.log(this.state.novoTweet);
-    // this.state.tweets.push(this.state.novoTweet);
 
     this.props.dispatch(
       ActionCreators.criaTweet(novoTweet)
@@ -82,8 +48,6 @@ class Home extends Component {
       this.setState({ novoTweet: '' });
       this.context.setMensagem('Novo tweet criado');
     });
-
-    // this.setState({ tweets: this.state.tweets });
   }
 
   novoTweetValido = () => {
@@ -93,15 +57,9 @@ class Home extends Component {
   }
 
   render() {
-    // console.log(this.state.novoTweet);
-    // console.log(this.state.tweets);
     const { novoTweet, loading } = this.state;
 
-    // console.log(this.props.listaTweets);
-
     if (loading) return <p>Carregando</p>;
-
-    // console.log(tweetSelecionado);
 
     return (
       <Fragment>

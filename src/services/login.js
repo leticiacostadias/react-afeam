@@ -1,6 +1,5 @@
 const LoginService = {
   logar(login, senha) {
-    // fetch -> axios
     return fetch('http://api-twitelum.herokuapp.com/login', {
       method: 'POST',
       headers: {
@@ -24,10 +23,6 @@ const LoginService = {
     }).then(data => {
       localStorage.setItem('token', data.token);
       return;
-
-      // redirecionar pro feed
-      // console.log(this.props);
-      // this.props.history.push('/');
     });
   }
 };

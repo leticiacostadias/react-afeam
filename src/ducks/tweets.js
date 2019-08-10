@@ -3,8 +3,6 @@ import tweetService from '../services/tweets';
 export const actionTypes = {
   atualiza: 'tweets/ATUALIZA_LISTA',
   novo: 'tweets/NOVO_TWEET',
-
-  // novo action type
   excluir: 'tweets/EXCLUIR_TWEET',
   curtir: 'tweets/CURTIR_TWEET'
 };
@@ -73,7 +71,6 @@ const stateInicial = {
 };
 
 export function tweetsReducer (state = stateInicial, action) {
-  // action => atualiza a lista de tweets
   switch (action.type) {
       case actionTypes.atualiza:
           return {
@@ -87,7 +84,6 @@ export function tweetsReducer (state = stateInicial, action) {
               lista: [action.tweetCriado, ...state.lista]
           };
 
-      // novo reduce handler
       case actionTypes.excluir:
         return {
           ...state,
@@ -96,25 +92,15 @@ export function tweetsReducer (state = stateInicial, action) {
         };
       
       case actionTypes.curtir:
-        // encontrar o tweet curtido
         const tweetSelecionado = state.lista
           .find(tweet => tweet._id === action.idDoTweetCurtido);
 
-        // alterar likeado e totalLikes
         tweetSelecionado.totalLikes += tweetSelecionado.likeado ? -1 : 1;
         tweetSelecionado.likeado = !tweetSelecionado.likeado
 
-        // QUEBRA
-        // tweetSelecionado = {
-        //   ...tweetSelecionado,
-        //   likeado: !tweetSelecionado.likeado,
-        //   totalLikes: tweetSelecionado.totalLikes + (tweetSelecionado.likeado ? -1 : 1)
-        // };
-        // atualizar o state
         return {
           ...state,
           lista: [...state.lista]
-          // atualizar a lista de tweets
         };
 
       default: 

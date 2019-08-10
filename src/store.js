@@ -10,6 +10,4 @@ const store = createStore(
   applyMiddleware(Thunk)
 );
 
-// window.store = store;
-
 export default store;

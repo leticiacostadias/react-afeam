@@ -1,15 +1,10 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types';
 
 import './tweet.css'
-import { NotificaoContext } from '../../contexts/NotificacaoContext';
 
 export default function Tweet(props) {
   const [ curtidores, setCurtidores ] = useState([]);
-  // const { setMensagem } = useContext(NotificaoContext);
-
-  // console.log(value);
-
   const {
     id,
     avatarURL,

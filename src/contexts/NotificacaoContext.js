@@ -6,15 +6,8 @@ export const NotificaoContext = createContext({
   setMensagem() {}
 });
 
-// NotificaoContext = {
-  // Provider: Component
-  // Consumer: Component
-// }
-
 export function NotificaoContextProvider ({ children }) {
   const [mensagem, setMensagem] = useState('');
-
-  // setMensagem('ha mudei o estado');
 
   return (
     <NotificaoContext.Provider value={{ mensagem, setMensagem }}>
@@ -25,10 +18,6 @@ export function NotificaoContextProvider ({ children }) {
           limpaMensagem={() => setMensagem('')}
         />
       }
-      {/* <NotificaoContext.Consumer> */}
-          {/* {({ mensagem, setMensagem }) => ( */}
-          {/* )} */}
-        {/* </NotificaoContext.Consumer> */}
     </NotificaoContext.Provider>
   );
 }

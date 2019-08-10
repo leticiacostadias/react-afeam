@@ -24,11 +24,8 @@ class LoginPage extends Component {
   handleLogar = (evento) => {
     evento.preventDefault();
 
-    // pegar usuario e senha
     const { login, senha } = this.state.inputValues;
 
-    // testar usuario e senha para logar
-    // usar a API
     loginService.logar(login, senha)
       .then(() => {
         this.props.history.push('/');
@@ -39,43 +36,6 @@ class LoginPage extends Component {
           erroMsg: `${errorObj.status} - ${errorObj.payload.message}`
         });
       });
-
-    // fetch -> axios
-    // fetch('http://api-twitelum.herokuapp.com/login', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify({
-    //     login,
-    //     senha
-    //   })
-    // }).then(async (resposta) => {
-    //   if (!resposta.ok) {
-    //     const errorObj = {
-    //       status: resposta.status,
-    //       payload: await resposta.json()
-    //     };
-
-    //     throw errorObj;
-    //   }
-
-    //   return resposta.json();
-    // }).then(data => {
-    //   // console.log(data)
-
-    //   // salvar o token
-    //   // localStorage, cookie, sessionStorage
-    //   localStorage.setItem('token', data.token);
-
-    //   // redirecionar pro feed
-    //   // console.log(this.props);
-    //   this.props.history.push('/');
-    // }).catch((errorObj) => {
-    //   this.setState({
-    //     erroMsg: `${errorObj.status} - ${errorObj.payload.message}`
-    //   });
-    // });
   }
 
   handleInputChange = ({ target }) => {
@@ -94,12 +54,10 @@ class LoginPage extends Component {
     const newInputErrors = {};
 
     if (!login) {
-      // login tem um erro
       newInputErrors.login = 'Campo obrigatório';
     }
 
     if (!senha || senha.length < 6) {
-      // senha tem um erro
       newInputErrors.senha = 'A senha deve ter pelo menos 6 caracteres';
     }
 

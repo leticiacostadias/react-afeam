@@ -24,7 +24,6 @@ function Roteamento() {
   return (
     <Switch>
       <RotaAutenticada
-        // deveEstarLogado
         deveEstarLogado={true}
         redirectTo="/login"
         path="/"

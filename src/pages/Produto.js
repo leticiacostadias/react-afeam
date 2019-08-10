@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 class Produto extends Component {
     render() {
-        // console.log(this.props);
         const { match } = this.props;
 
         return (
